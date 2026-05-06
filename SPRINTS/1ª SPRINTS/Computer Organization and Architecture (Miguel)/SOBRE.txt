@@ -1,0 +1,147 @@
+Sprint 1 — Projeto Sustentável em Arquitetura de Computadores
+
+Objetivos Principais
+
+Apresentar uma proposta de solução computacional eficiente para o EV Challenge 2026, com foco na arquitetura de sistemas embarcados ou de baixo consumo energético.
+Produzir um vídeo pitch de até 5 minutos, explicando como conceitos de arquitetura de processadores, Assembly e eficiência computacional contribuem para a sustentabilidade na mobilidade elétrica.
+Documentar a proposta no README do GitHub.
+
+
+
+Objetivos Específicos
+
+Identificar um problema relacionado ao uso ineficiente de recursos computacionais em eletropostos ou sistemas de mobilidade elétrica.
+Propor uma solução baseada em:
+
+Arquitetura de processadores (RISC vs CISC, pipeline, etc.)
+Programação em Assembly (otimização de desempenho e consumo)
+Relacionar a solução com:
+
+Eficiência energética
+Sustentabilidade
+Uso de energias renováveis
+Demonstrar a viabilidade técnica, destacando:
+
+Redução de consumo de energia computacional
+Melhor uso de hardware embarcado
+
+
+
+Problema
+
+Sistemas de eletropostos frequentemente utilizam software de alto nível e hardware genérico, o que pode gerar:
+
+Consumo desnecessário de energia
+Baixa eficiência no processamento de dados (ex: autenticação, controle de carga)
+Desperdício de recursos computacionais
+
+
+
+Proposta de Solução 
+
+Desenvolver um módulo de controle otimizado em baixo nível (Assembly) para eletropostos, que:
+
+Gerencie operações críticas (leitura de sensores, controle de carga, autenticação)
+Utilize instruções otimizadas do processador
+Reduza ciclos de CPU ? menor consumo energético
+Seja projetado para rodar em:
+
+Microcontroladores
+Sistemas embarcados de baixo consumo
+
+
+
+Tecnologias Envolvidas
+
+Linguagem Assembly
+Simuladores de arquitetura (ex: MIPS, RISC-V, x86)
+Conceitos de:
+
+Pipeline
+Cache
+Ciclos de clock
+Consumo energético por instrução
+(Opcional) Integração com Arduino ou sistemas embarcados
+
+
+
+Sustentabilidade na Arquitetura
+
+Aqui está o diferencial da adaptação:
+
+Código em Assembly ? menos instruções ? menor consumo de energia
+Escolha de arquitetura (ex: RISC) ? maior eficiência energética
+Processamento otimizado ? menos uso de hardware potente
+Impacto direto:
+
+Redução do consumo dos eletropostos
+Maior eficiência no uso de energia renovável
+
+
+
+Tarefa (Vídeo Pitch)
+
+O vídeo deve conter:
+
+Apresentação do grupo
+Problema identificado (ineficiência computacional nos eletropostos)
+Proposta de solução (uso de Assembly + arquitetura eficiente)
+Demonstração conceitual:
+
+Comparação (alto nível vs baixo nível)
+Explicação de ciclos de CPU e consumo
+Tecnologias utilizadas
+Impacto sustentável
+
+?? Importante: protagonismo dos alunos (sem narração por IA)
+
+
+
+README 
+
+Título do projeto
+Integrantes (nome + RM)
+Problema
+Justificativa
+Proposta de solução
+Arquitetura utilizada
+Trechos de código Assembly (se possível)
+Impactos esperados
+Relação com sustentabilidade e energias renováveis
+
+
+
+Ideias de Projetos 
+
+Sistema de autenticação de usuário otimizado em Assembly
+Controle de carga de bateria com menor uso de CPU
+Monitoramento de energia com instruções eficientes
+Comparação de consumo entre código em C vs Assembly
+
+
+
+Critérios de Avaliação 
+
+40 pontos: clareza da proposta + aplicação de arquitetura e sustentabilidade
+30 pontos: fundamentação técnica (Assembly, processador, eficiência energética)
+30 pontos: organização do GitHub + README
+
+
+
+Entregável
+
+Arquivo .txt contendo:
+
+Nome e RM dos integrantes
+Link do vídeo (YouTube não listado)
+Link do repositório GitHub
+
+
+
+
+
+Condições de Entrega
+
+Integridade do arquivo é responsabilidade do grupo
+Arquivos corrompidos não serão aceitos
+Não serão aceitos envios fora do prazo
