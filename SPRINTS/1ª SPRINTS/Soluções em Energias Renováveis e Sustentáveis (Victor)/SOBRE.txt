@@ -1,0 +1,35 @@
+6.
+Produzir um vídeo pitch de até 5 minutos integrando conceitos de energias renováveis e sustentabilidade ao contexto de mobilidade elétrica.
+Documentar a proposta no README do repositório GitHub.
+
+Objetivos Específicos
+
+Identificar e apresentar o problema central relacionado à gestão de eletropostos.
+Propor uma solução baseada no ecossistema GoodWe e FIAP, justificando as escolhas sob a ótica da sustentabilidade e da eficiência energética.
+Demonstrar a viabilidade inicial da solução nos aspectos técnico e de negócio.
+
+Tarefa
+
+Produzir um vídeo pitch com apresentação do grupo, contexto do problema, proposta de solução e tecnologias envolvidas.
+Detalhar no README: título do projeto, equipe, problema e justificativa, proposta e impactos esperados, tecnologias utilizadas e como os princípios de energias renováveis e sustentabilidade fundamentam a solução.
+
+Observações Importantes
+
+As escolhas tecnológicas devem ser justificadas com base nos conceitos de energias renováveis e sustentabilidade estudados no semestre.
+O protagonismo do vídeo deve ser dos integrantes do grupo, sem narrações automatizadas por IA.
+
+Critérios de Avaliação
+
+Até 40 pontos: clareza da proposta e evidência de aplicação dos conceitos de energias renováveis e sustentabilidade.
+Até 30 pontos: fundamentação técnica da solução no contexto de mobilidade elétrica e gestão de energia.
+Até 30 pontos: organização do repositório e qualidade do README.
+
+Entregável
+
+APENAS um arquivo .txt contendo: nome e RM de cada integrante, link do vídeo no YouTube (não listado) e link do repositório GitHub.
+
+Condições de Entrega
+
+A integridade do arquivo é responsabilidade do grupo.
+Arquivos vazios ou corrompidos não serão considerados.
+Não serão aceitos envios pelo Teams ou fora do prazo.

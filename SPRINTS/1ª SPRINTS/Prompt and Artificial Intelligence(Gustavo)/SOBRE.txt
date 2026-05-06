@@ -1,0 +1,121 @@
+Sprint 1 — Exploração e Planejamento do
+
+Chatbot GoodWe
+
+Objetivos Principais
+
+• Explorar o contexto do EV Challenge 2026 e identificar como um chatbot com
+
+IA pode contribuir para a solução do problema central da GoodWe.
+
+• Documentar a proposta técnica do chatbot, incluindo tecnologias escolhidas,
+
+fluxo de funcionamento e modelo de teste.
+
+• Estruturar o repositório GitHub com toda a documentação da Sprint 1.
+
+
+
+Objetivos Específicos
+
+• Compreender o problema central do desafio: a ausência de mecanismos
+
+integrados nos eletropostos para orquestrar potência, registrar ciclos, faturar
+
+e comunicar (ChargeGrid Intelligence) ou gerenciar uso compartilhado em
+
+condomínios (EV ChargeOps).
+
+• Definir o escopo do chatbot: qual persona será atendida (operador comercial,
+
+síndico, morador ou técnico), quais perguntas ele deverá responder e qual
+
+contexto será injetado no modelo.
+
+• Selecionar e justificar as tecnologias de IA que serão utilizadas (ex: LLama,
+
+OpenAI API, Gemini, LangChain, etc.).
+
+• Elaborar um fluxograma básico do funcionamento do chatbot, representando
+
+o fluxo de entrada do usuário, processamento pelo modelo e geração de
+
+resposta contextualizada.
+
+• Criar um modelo de teste com pelo menos 5 perguntas esperadas e as
+
+respostas ideais correspondentes, servindo como base para avaliação na
+
+Sprint 2.
+
+
+
+Tarefa
+
+• Criar e documentar o repositório GitHub do projeto com README completo
+
+contendo: nome do projeto, integrantes, problema abordado, proposta do
+
+chatbot, tecnologias selecionadas e justificativa técnica.
+
+• Desenvolver o fluxograma de funcionamento do chatbot (pode ser feito com
+
+Miro, Draw.io, Figma ou similar) e incluí-lo no repositório.
+
+• Elaborar o modelo de teste com perguntas e respostas esperadas,
+
+demonstrando o comportamento desejado do chatbot dentro do contexto
+
+GoodWe/FIAP.
+
+• Redigir o contexto-base (system prompt) que será utilizado para condicionar
+
+o modelo de IA ao problema da GoodWe.
+
+
+
+Observações Importantes
+
+• O chatbot deve ser pensado como ferramenta operacional real, não como
+
+demonstração genérica. A escolha do contexto (comercial ou condominial)
+
+deve ser justificada.
+
+• O fluxograma deve refletir a lógica de funcionamento do sistema, incluindo
+
+entradas, processamento pelo LLM e saída da resposta.
+
+• O system prompt elaborado nesta Sprint será a base do desenvolvimento na
+
+Sprint 2 — quanto mais preciso, melhor o resultado final.
+
+Critérios de Avaliação
+
+• Até 40 pontos: qualidade da documentação no README e clareza na
+
+definição do escopo e persona do chatbot.
+
+• Até 30 pontos: coerência técnica do fluxograma e aderência ao contexto do
+
+EV Challenge 2026.
+
+• Até 30 pontos: qualidade do modelo de teste e do system prompt elaborado,
+
+demonstrando compreensão do problema da GoodWe.
+
+
+
+Entregável
+
+APENAS um arquivo .txt contendo: nome e RM de cada integrante, link do
+
+repositório GitHub com README, fluxograma e modelo de teste.
+
+Condições de Entrega
+
+• A integridade do arquivo é responsabilidade do grupo.
+
+• Arquivos vazios ou corrompidos não serão considerados.
+
+• Não serão aceitos envios pelo Teams ou fora do prazo.
