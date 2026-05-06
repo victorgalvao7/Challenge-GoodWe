@@ -1,0 +1,32 @@
+Challenge Sprint I - Modelagem Matemática e Computacional
+
+
+
+Orientações: 
+
+Essa atividade consiste em resolver o Challenge Sprint abaixo em grupos, a fim de que os alunos possam relacionar os conteúdos aprendidos com as atividades da empresa GoodWe;
+Esta atividade deve ser realizada em grupos;
+A Challenge Sprint I vale 10 pontos;
+O prazo de entrega final é até 22/05 (sexta-feira), às 23:59.
+
+
+
+Challenge Sprint I
+
+Uma plataforma monitora e controla a potência elétrica entregue a veículos em um eletroposto comercial. Suponha que, em uma determinada sessão de recarga controlada, a potência instantânea total entregue pelo sistema, em kW, seja modelada por
+
+P(t) = 18 + (24t)/(t+2), t = 0
+
+em que t representa o tempo, em minutos, contado a partir do início da sessão.
+
+ 
+
+Perguntas:
+
+Elabore um gráfico da função.
+Qual o valor do limite de P(t) para t tendendo a 0+ e para t tendendo ao infinito?  Explique o que esses valores representam para o comportamento da recarga ao longo do tempo.
+Calcule a variação média da potência entre t = 1 e t = 3. O que esses resultados indicam para o gerenciamento da infraestrutura?
+Determine a derivada P'(t). Explique, com suas palavras, o significado físico dessa derivada no contexto da sessão de recarga.
+Compare P'(1) e P'(6).
+
+Analise a partir de P'(t) em que intervalos a potência está aumentando e diminuindo. Construa o gráfico de P'(t).

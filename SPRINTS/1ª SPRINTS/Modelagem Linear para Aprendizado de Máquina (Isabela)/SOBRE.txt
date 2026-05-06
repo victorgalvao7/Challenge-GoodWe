@@ -1,0 +1,41 @@
+1º SEMESTRE – CHALLENGE SPRINT 1:
+
+ORIENTAÇÕES GERAIS:
+
+- Todos os entregáveis deverão conter o nome completo e o número de matrícula de todos os integrantes;
+
+- Todos os integrantes do grupo são responsáveis pela entrega final;
+
+- Não envie links, poste todos os entregáveis diretamente no Portal, nos formatos exigidos;
+
+- Após o prazo de entrega, o sistema não aceitará envios posteriores;
+
+- O(s) arquivo(s) enviado(s) será(ão) o(s) avaliado(s), não sendo permitida substituição após o prazo;
+
+- Será descontado 1,0 ponto por item ausente e/ou não atendido na avaliação.
+
+01) (4,0 pontos) Os alunos deverão se organizar em grupos para realizar uma pesquisa utilizando uma base de dados que tenha relação com o tema proposto e com a empresa. 
+
+A base de dados poderá ser escolhida livremente pelo grupo, desde que seja adequada ao contexto e devidamente justificada, não sendo aceitas bases geradas artificialmente ou com dados fictícios.
+
+A base de dados deverá estar no formato Excel e conter:
+
+a) No mínimo 2 variáveis qualitativas nominais e 2 variáveis qualitativas ordinais, com pelo menos 100 observações.
+
+b) No mínimo 2 variáveis quantitativas discretas e 2 variáveis quantitativas contínuas, com pelo menos 100 observações.
+
+02) (4,0 pontos) Utilizando a base de dados do exercício 01), montar a Tabela de Distribuição de Frequências utilizando a Linguagem de Programação Python para:
+
+a) 1 variável quantitativa discreta, na sequência, extraia pelo menos 2 insights da tabela utilizando #.  
+
+b) 1 variável quantitativa contínua, na sequência, extraia pelo menos 2 insights da tabela utilizando #.
+
+03) (2,0 pontos) Elaborar um relatório técnico contendo os principais insights obtidos nas análises realizadas nos itens 01 e 02, destacando de que forma os resultados podem contribuir para a tomada de decisão e/ou geração de valor para a empresa.
+
+04) Em seguida, apenas um representante de cada grupo deverá postar no Portal:a) O arquivo com a base de dados, obrigatoriamente em formato .csv (Comma-Separated Values) ou .xlsx (Excel);
+
+b) Os códigos desenvolvidos, obrigatoriamente em formato .py (Python);
+
+c) O relatório técnico, obrigatoriamente em formato .pdf (PDF).
+
+OBS: As entregas devem ser realizadas estritamente conforme as orientações e formatos definidos e trabalhados em aula pelo(a) respectivo(a) professor(a) da disciplina durante o semestre.

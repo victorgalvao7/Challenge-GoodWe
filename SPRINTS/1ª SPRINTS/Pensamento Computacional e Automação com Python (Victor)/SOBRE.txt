@@ -1,0 +1,177 @@
+Sprint 1 – GoodWe Challenge
+
+ChargeGrid Intelligence – Pesquisa, Problemas e Soluções
+
+
+
+Contexto
+
+A GoodWe está expandindo suas soluções de carregamento de veículos elétricos do ambiente residencial para o ambiente comercial, por meio do conceito de ChargeGrid Intelligence.
+
+Esse novo cenário envolve desafios mais complexos, como:
+
+Gerenciamento inteligente de demanda de energia
+Sistemas de cobrança para recarga
+Integração entre diferentes dispositivos
+Uso de inteligência artificial para otimização
+
+
+
+Objetivo da Sprint
+
+Desenvolver uma análise estruturada do desafio ChargeGrid, considerando:
+
+O contexto tecnológico da GoodWe
+Os desafios da expansão para o ambiente comercial
+Problemas técnicos, operacionais e de experiência do usuário
+Propostas de soluções com base em lógica e pensamento computacional
+
+
+
+Desafio
+
+O trabalho consiste no desenvolvimento de um estudo completo com base nos seguintes pilares do ChargeGrid:
+
+Controle de demanda
+Protocolos abertos
+Tarifação e pagamento
+Uso de inteligência artificial
+
+A proposta é compreender o funcionamento do sistema, identificar problemas relevantes e estruturar soluções coerentes com o cenário apresentado.
+
+
+
+Estrutura do Trabalho
+
+O material deve conter:
+
+1. Contextualização
+
+O que é a GoodWe
+O que é o ChargeGrid
+Diferença entre solução residencial e comercial
+
+2. Análise dos pilares
+
+Para cada pilar:
+
+Explicação do conceito
+Identificação de desafios ou limitações
+Levantamento de possíveis riscos ou problemas
+
+3. Identificação de Problemas
+
+O trabalho deve apresentar problemas como:
+
+Sobrecarga de energia em horários de pico
+Falta de padronização entre equipamentos
+Dificuldade de cobrança e monetização
+Experiência do usuário comprometida
+Ineficiência no uso da energia
+
+4. Proposição de Soluções
+
+Para cada problema identificado:
+
+Descrição da solução proposta
+Explicação de como funciona
+Impacto gerado
+
+
+
+Aplicação de Pensamento Computacional
+
+Espera-se organização lógica do raciocínio, com evidências de:
+
+Decomposição do problema
+Reconhecimento de padrões
+Abstração
+Construção estruturada de soluções
+
+
+
+Entregáveis
+
+A entrega deve ser feita via portal FIAP contendo um único arquivo .zip com:
+
+1. PDF – Documentação da pesquisa
+
+Conteúdo esperado:
+
+Introdução
+Contexto da GoodWe e ChargeGrid
+Análise dos 4 pilares
+Problemas identificados
+Soluções propostas
+Conclusão
+
+2. PDF – Apresentação
+
+Slides utilizados na apresentação, exportados em PDF
+
+3. Arquivo .txt
+
+Arquivo contendo o link do vídeo
+
+4. Vídeo não listado no YouTube
+
+Duração máxima de 5 minutos
+Apresentação dos principais pontos da pesquisa, problemas e soluções
+
+Observação: o link do vídeo deve estar dentro do arquivo .txt incluído no .zip.
+
+
+
+Organização da Entrega
+
+Nome do arquivo:
+
+Sprint1_GoodWe_NomeDaEquipe.zip
+
+Conteúdo obrigatório do .zip:
+
+documentacao.pdf
+apresentacao.pdf
+video.txt
+
+
+
+Critérios de Avaliação de 0 a 100
+
+Análise do contexto e compreensão do desafio – 25 pontos
+
+Clareza ao explicar a GoodWe e o ChargeGrid
+Entendimento da transição entre os cenários
+
+Identificação de problemas – 25 pontos
+
+Relevância dos problemas apresentados
+Conexão com os pilares do desafio
+Profundidade da análise
+
+Proposição de soluções – 25 pontos
+
+Coerência com os problemas
+Aplicabilidade
+Nível de inovação
+
+Aplicação de pensamento computacional – 15 pontos
+
+Organização lógica
+Clareza no raciocínio
+Estrutura consistente entre problema e solução
+
+Comunicação e organização – 10 pontos
+
+Qualidade dos PDFs
+Clareza da apresentação
+Objetividade do vídeo
+Cumprimento das regras de entrega
+
+
+
+Observações Importantes
+
+O vídeo deve ser objetivo e respeitar o tempo máximo
+Entregas fora do padrão impactam diretamente na nota
+Não há necessidade de desenvolvimento de código nesta Sprint

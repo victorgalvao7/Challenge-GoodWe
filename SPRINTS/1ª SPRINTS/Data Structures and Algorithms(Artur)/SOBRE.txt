@@ -1,0 +1,121 @@
+Sprint 1Simulador de Sessão de Recarga
+
+Construir um programa que simule:
+
+Início e fim de sessão de recarga
+Controle básico de energia
+Registro de dados da sessão
+Aplicação de regras simples de cobrança
+
+
+
+
+
+Entregáveis obrigatórios
+
+Código em Python ou JavaScript
+Execução com entrada de dados
+Saída formatada mostrando o resultado da sessão
+Documento explicando a lógica
+
+
+
+
+
+Critérios de Avaliação (0–100)
+
+1. Uso correto de estruturas condicionais (if / else / switch) (0–20)
+
+(0–5) Uso incorreto ou ausente
+(6–10) Uso básico com erros
+(11–15) Uso correto
+(16–20) Uso organizado e bem estruturado
+
+Esperado:
+
+Decisão de tarifação
+Validação de dados
+
+
+
+
+
+2. Uso de estruturas de repetição (for, while, do-while) (0–20)
+
+(0–5) Não utilizado corretamente
+(6–10) Uso básico
+(11–15) Uso funcional
+(16–20) Uso adequado com controle correto de fluxo
+
+Exemplo:
+
+Simular tempo de recarga
+Repetir entrada até válida
+
+
+
+
+
+3. Lógica da Sessão de Recarga (0–20)
+
+(0–5) Incompleta
+(6–10) Parcial
+(11–15) Funcional
+(16–20) Completa e coerente
+
+Deve conter:
+
+Início da sessão
+Tempo de recarga
+Energia consumida (simulada)
+
+
+
+
+
+4. Cálculo de Tarifação (0–15)
+
+(0–5) Não implementado
+(6–10) Cálculo simples
+(11–13) Cálculo correto
+(14–15) Regras diferenciadas (ex: horário, tipo de usuário)
+
+
+
+
+
+5. Organização do Código (0–15)
+
+(0–5) Desorganizado
+(6–10) Parcialmente organizado
+(11–13) Organizado
+(14–15) Muito bem estruturado
+
+Avaliar:
+
+Clareza
+Nomes de variáveis
+Separação lógica
+
+
+
+
+
+6. Entrada e Saída de Dados (0–10)
+
+(0–3) Confusa
+(4–6) Funcional
+(7–8) Clara
+(9–10) Bem formatada (tipo sistema real)
+
+
+
+
+
+Resultado esperado do Sprint 1
+
+Um programa que:
+
+Simula uma recarga
+Calcula custo
+Exibe relatório simples
