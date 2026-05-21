@@ -11,4 +11,4 @@ Esse repositório foi criado para a resolução e postagem do projeto challenge 
 - [ ] **PROPT AND ARTIFICIAL INTELLIGENCE (Gustavo)**
 - [x] **DATA STRUCTURES AND ALGORITHMS (Artur)**
 - [ ] **COMPUTER ORGANIZATION AND ARCHITECTURE (Miguel)**
-- [ ] **COMPUTER SCIENCE (Miguel)**
+- [x] **COMPUTER SCIENCE (Miguel)**
