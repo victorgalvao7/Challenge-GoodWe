@@ -9,6 +9,6 @@ Esse repositório foi criado para a resolução e postagem do projeto challenge 
 - [ ] **MODELAGEM LINEAR PARA APRENDIZADO DE MÁQUINA (Isabela)**
 - [ ] **MODELAGEM MATEMÁTICA E COMPUTACIONAL (Isabela)**
 - [ ] **PROPT AND ARTIFICIAL INTELLIGENCE (Gustavo)**
-- [ ] **DATA STRUCTURES AND ALGORITHMS (Artur)**
+- [x] **DATA STRUCTURES AND ALGORITHMS (Artur)**
 - [ ] **COMPUTER ORGANIZATION AND ARCHITECTURE (Miguel)**
 - [ ] **COMPUTER SCIENCE (Miguel)**
