@@ -1,0 +1,128 @@
+Modelo de Teste Chatbot WeCharge
+
+Este modelo define perguntas e respostas esperadas para validar o comportamento do chatbot WeCharge dentro do contexto GoodWe/FIAP. Os dados de valores, kWh e horários podem ser mockados, mas o formato e o raciocínio devem seguir os exemplos abaixo.
+
+1. Status operacional por site
+
+Pergunta: 
+“Quais carregadores estão em operação agora no eletroposto do Shopping Paulista?”
+
+Resposta ideal (exemplo):  
+“Neste momento, 3 de 5 carregadores no eletroposto do Shopping Paulista estão em operação: WC-SP-01, WC-SP-02 e WC-SP-05. Os carregadores WC-SP-03 e WC-SP-04 estão disponíveis, aguardando conexão de veículo. Considero ‘em operação’ os equipamentos com sessão ativa ou prontos para uso, sem falhas registradas.”
+
+Comportamento desejado:
+- Identificar o site correto.
+- Contar total de carregadores e quantos estão em operação.
+- Destacar carregadores com falha, se houver.
+
+2. Energia entregue na rede WeCharge
+
+Pergunta:  
+“Quanto de energia foi entregue hoje em todos os eletropostos da rede WeCharge?”
+
+Resposta ideal (exemplo):  
+“Até agora, hoje foram entregues 1.240 kWh em todos os eletropostos da rede WeCharge. Desse total, 60% vieram de geração fotovoltaica, 20% de bateria e 20% da rede elétrica. Esses valores foram consolidados a partir dos registros de sessão dos carregadores GoodWe.”
+
+Comportamento desejado:
+- Somar kWh de todas as sessões do dia.
+- Apresentar, se disponível, o breakdown por origem de energia (PV, bateria, rede).
+
+
+3. Receita estimada por site e período
+
+Pergunta: 
+“Qual foi a receita estimada na última semana no eletroposto WeCharge do Rodoshop Graal da Dutra?”
+
+Resposta ideal (exemplo):  
+“Na última semana (segunda a domingo), a receita estimada no eletroposto WeCharge do Rodoshop Graal da Dutra foi de R$ 12.430,00, considerando o tarifário padrão aplicado em todas as sessões registradas. Se você quiser, posso detalhar a receita por tipo de conector ou por faixa de horário.”
+
+Comportamento desejado:
+- Filtrar sessões por site e intervalo de datas.
+- Somar valores faturados ou estimados.
+- Oferecer detalhamento adicional.
+
+4. Detecção de falhas
+
+Pergunta:
+“Existe algum carregador com falha ou erro de comunicação na rede WeCharge hoje?”
+
+Resposta ideal (exemplo):
+“Sim. Hoje há 2 carregadores com falha ou erro de comunicação:  
+- WC-GRL-02, no Rodoshop Graal da Dutra, com erro de comunicação desde as 14h32.  
+- WC-SHP-07, no Shopping Paulista, com falha de hardware reportada às 09h15.
+
+Recomendo verificar a conexão de rede local no WC-GRL-02 e abrir um chamado técnico para inspeção do WC-SHP-07.”
+
+Comportamento desejado:
+- Listar carregadores com status de erro/falha.
+- Incluir local, tipo de problema e horário de início.
+- Sugerir próximo passo operacional (verificar rede, abrir chamado).
+
+
+5. Explicação de modo de carga (PV Priority)
+
+Pergunta: 
+“Como explico para o cliente o modo ‘PV Priority’ no eletroposto WeCharge?”
+
+Resposta ideal (exemplo):
+“No modo ‘PV Priority’, o sistema dá prioridade máxima à energia solar disponível para carregar o veículo. A energia fotovoltaica supre primeiro as cargas do local (por exemplo, iluminação e climatização) e o excedente vai para o carro. Se a energia solar não for suficiente, o sistema pode complementar com a rede elétrica, mas a bateria estacionária não é descarregada para o veículo. É um modo pensado para maximizar o uso de energia limpa e reduzir o custo de energia da rede, mantendo a operação comercial sustentável.”
+
+Comportamento desejado:
+- Explicar em linguagem simples.
+- Destacar benefício ambiental e econômico.
+- Evitar jargões técnicos excessivos.
+
+6. Reserva de carregador (visão futura)
+
+Pergunta: 
+“Quero reservar um carregador rápido no WeCharge do Shopping Paulista amanhã às 19h. Dá?”
+
+Resposta ideal (exemplo): 
+“Consigo ajudar com a reserva. Amanhã às 19h há 2 carregadores rápidos (60 kW) disponíveis no WeCharge do Shopping Paulista.  
+Para concluir a reserva, preciso de algumas informações:
+
+- Modelo do seu carro.
+- Nível atual de bateria (%).
+- Quanto você deseja carregar (por exemplo, até 80%).  
+
+Com esses dados, posso estimar o tempo de sessão e o custo aproximado.”
+
+Comportamento desejado:
+- Verificar disponibilidade (mesmo que em dados mock).
+- Responder se dá ou não para reservar.
+- Coletar os dados necessários para cálculo posterior.
+
+
+7. Estimativa de tempo e custo de sessão
+
+Pergunta:  
+“Estou com 20% de bateria em um carro com bateria de 60 kWh e quero carregar até 80% no WeCharge do Graal. Quanto tempo e quanto vou pagar mais ou menos?”
+
+Resposta ideal (exemplo): 
+“Para sair de 20% para 80% em uma bateria de 60 kWh, você precisa carregar aproximadamente 36 kWh.  
+No WeCharge do Graal, usando um carregador de 60 kW:
+
+- Tempo estimado de carga: cerca de 35 a 45 minutos, dependendo das limitações do veículo.  
+- Com a tarifa atual de R$ 2,20 por kWh, o custo estimado é em torno de R$ 79,20.
+
+Esses valores são estimativas e podem variar conforme a curva de carregamento do veículo e eventuais ajustes tarifários.”
+
+Comportamento desejado:
+- Calcular kWh necessários.
+- Estimar tempo com base em potência nominal.
+- Estimar custo com base em tarifa.
+
+8. Recomendação de eletroposto em rota
+
+Pergunta:  
+“Saindo de São Paulo para o Rio com 50% de bateria, qual eletroposto WeCharge você recomenda para eu parar primeiro?”
+
+Resposta ideal (exemplo): 
+“Com 50% de bateria, eu recomendaria como primeira parada o WeCharge do Rodoshop Graal na Dutra (km XX), que está a aproximadamente 180 km do seu ponto de partida. Ele oferece carregadores de 60 kW, tem tarifa de R$ 2,10 por kWh e costuma ter boa disponibilidade em horário comercial. Assim, você consegue chegar com segurança, fazer uma carga rápida e seguir viagem com folga.”
+
+Comportamento desejado:
+- Sugerir um eletroposto coerente com a autonomia.
+- Considerar distância, potência, tarifa e disponibilidade (mesmo que em dados mock).
+- Explicar o porquê da recomendação.
+
+Esses testes serão usados na Sprint 2 para validar se o chatbot implementado corresponde ao comportamento esperado definido na Sprint 1.
