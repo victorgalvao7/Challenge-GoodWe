@@ -239,6 +239,7 @@ A proposta se conecta à sustentabilidade em múltiplas dimensões:
 ## Tecnologias e Ferramentas
 - **Assembly RISC-V (RV32I)** — linguagem de programação principal
 - **RARS (RISC-V Assembler and Runtime Simulator)** — simulador para testes
+- **RISC-V INTERPRETER** - website com simulador para demonstrações na apresentação
 - **Wokwi** — simulação de microcontroladores embarcados
 - **GCC RISC-V Toolchain** — compilação cruzada para validação
 - **Conceitos aplicados**: Pipeline, Cache, Modos de baixo consumo, PWM, ADC, UART
