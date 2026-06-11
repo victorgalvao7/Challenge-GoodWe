@@ -8,7 +8,7 @@ Esse repositório foi criado para a resolução e postagem do projeto challenge 
 - [x] **SOLUÇÕES EM ENERGIAS RENOVÁVEIS E SUSTENTÁVEIS (Victor)**
 - [x] **MODELAGEM LINEAR PARA APRENDIZADO DE MÁQUINA (Isabela)**
 - [x] **MODELAGEM MATEMÁTICA E COMPUTACIONAL (Isabela)**
-- [ ] **PROPT AND ARTIFICIAL INTELLIGENCE (Gustavo)**
+- [x] **PROPT AND ARTIFICIAL INTELLIGENCE (Gustavo)**
 - [x] **DATA STRUCTURES AND ALGORITHMS (Artur)**
-- [ ] **COMPUTER ORGANIZATION AND ARCHITECTURE (Miguel)**
+- [x] **COMPUTER ORGANIZATION AND ARCHITECTURE (Miguel)**
 - [x] **COMPUTER SCIENCE (Miguel)**
