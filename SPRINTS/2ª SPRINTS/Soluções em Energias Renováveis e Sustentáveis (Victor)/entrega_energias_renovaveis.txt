@@ -1,0 +1,15 @@
+WeCharge — Sprint 2 | Soluções em Energias Renováveis e Sustentáveis
+FIAP | GoodWe EV Challenge 2026
+
+INTEGRANTES:
+Victor Vieira Galvao      — RM 571483
+Miguel Silverio de Avila  — RM 568873
+Isabela Camargo Souza     — RM 569196
+Gustavo Gamba Zancopé     — RM 569287
+Artur Souza Pereira       — RM 570880
+
+VÍDEO (YouTube não listado):
+https://youtu.be/E_fqRimrWMc
+
+REPOSITÓRIO GITHUB:
+https://github.com/victorgalvao7/Challenge-GoodWe/tree/main/SPRINTS/2%C2%AA%20SPRINTS/Pensamento%20Computacional%20e%20Automa%C3%A7%C3%A3o%20com%20Python%20(Victor)
