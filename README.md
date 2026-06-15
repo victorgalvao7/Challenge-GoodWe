@@ -1,6 +1,6 @@
 # ⚡ WeCharge — ChargeGrid Intelligence
 
-**Sprint 2 | GoodWe EV Challenge 2026 | FIAP**
+**WeCharge | GoodWe EV Challenge 2026 | FIAP**
 
 Plataforma de gerenciamento inteligente de eletropostos comerciais integrada ao ecossistema GoodWe.
 
@@ -183,20 +183,6 @@ RESUMO FINAL
 
 ---
 
-## 🌱 Sustentabilidade e Energias Renováveis
-
-O WeCharge contribui para um futuro mais sustentável através da **gestão inteligente de energia**:
-
-| Princípio | Implementação no WeCharge |
-|---|---|
-| Eficiência energética | IA distribui a carga entre os carregadores de forma otimizada, reduzindo desperdício |
-| Redução de pico | Load Balancing evita sobrecargas e o acionamento de usinas de ponta (mais poluentes) |
-| Viabilidade comercial | Eletropostos rentáveis aceleram a adoção de VEs, reduzindo emissões do transporte |
-| Transparência | Usuário vê exatamente quanto consome e paga — incentiva uso consciente |
-
-A lógica é simples: **quanto mais eficiente a distribuição de carga, menor o desperdício na rede elétrica e menor o impacto ambiental** — mesmo sem geração própria de energia renovável.
-
----
 
 ## 📈 Impactos Esperados
 
@@ -204,19 +190,6 @@ A lógica é simples: **quanto mais eficiente a distribuição de carga, menor o
 - ✅ Monetização do eletroposto desde o primeiro mês
 - ✅ Menor consumo da rede por sessão graças à IA
 - ✅ Experiência de usuário simples: código ou QR Code → meta → pagar → carregar
-
----
-
-## 📂 Estrutura do Repositório
-
-```
-Challenge-GoodWe/
-├── wecharge_simulacao.py   # Simulação Python interativa — Sprint 2
-├── documentacao.pdf        # Pesquisa completa — Sprint 1
-├── apresentacao.pdf        # Slides — Sprint 1
-├── video.txt               # Link do vídeo no YouTube
-└── README.md               # Este arquivo
-```
 
 ---
 
