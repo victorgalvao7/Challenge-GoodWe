@@ -234,17 +234,17 @@ Challenge-GoodWe/
 | Computer Organization and Architecture | Miguel | ✅ |
 | Computer Science | Miguel | ✅ |
 
-### Sprint 2 — Prova de Conceito Funcional 🔄
+### Sprint 2 — Prova de Conceito Funcional ✅
 | Disciplina | Responsável | Status |
 |---|---|---|
 | Pensamento Computacional e Automação com Python | Victor | ✅ |
 | Soluções em Energias Renováveis e Sustentáveis | Victor | ✅ |
-| Modelagem Linear para Aprendizado de Máquina | Isabela | 🔄 |
-| Modelagem Matemática e Computacional | Isabela | 🔄 |
-| Prompt and Artificial Intelligence | Gustavo | 🔄 |
-| Data Structures and Algorithms | Artur | 🔄 |
-| Computer Organization and Architecture | Miguel | 🔄 |
-| Computer Science | Miguel | 🔄 |
+| Modelagem Linear para Aprendizado de Máquina | Isabela | ✅ |
+| Modelagem Matemática e Computacional | Isabela | ✅ |
+| Prompt and Artificial Intelligence | Gustavo | ✅ |
+| Data Structures and Algorithms | Artur | ✅ |
+| Computer Organization and Architecture | Miguel | ✅ |
+| Computer Science | Miguel | ✅ |
 
 ---
 
