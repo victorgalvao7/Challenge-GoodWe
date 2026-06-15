@@ -9,7 +9,7 @@ Gustavo Gamba Zancopé     — RM 569287
 Artur Souza Pereira       — RM 570880
 
 VÍDEO (YouTube não listado):
-https://youtu.be/E_fqRimrWMc
+https://youtu.be/HmwEoRm2mBw
 
 REPOSITÓRIO GITHUB:
 https://github.com/victorgalvao7/Challenge-GoodWe/tree/main/SPRINTS/2%C2%AA%20SPRINTS/Pensamento%20Computacional%20e%20Automa%C3%A7%C3%A3o%20com%20Python%20(Victor)
