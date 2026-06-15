@@ -20,7 +20,7 @@ Plataforma de gerenciamento inteligente de eletropostos comerciais integrada ao 
 
 ## 🎥 Vídeo de Demonstração
 
-🔗 [Assistir no YouTube](LINK_DO_VIDEO_AQUI)
+🔗 [Assistir no YouTube](https://youtu.be/E_fqRimrWMc)
 
 ---
 
