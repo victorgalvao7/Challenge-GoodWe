@@ -2,7 +2,7 @@
 
 **WeCharge | GoodWe EV Challenge 2026 | FIAP**
 
-Plataforma de gerenciamento inteligente de eletropostos comerciais integrada ao ecossistema GoodWe.
+Plataforma web de gerenciamento de eletropostos, com painel do operador (dono do ponto de recarga) e painel do motorista (sessão de carga completa, do cadastro ao pagamento).
 
 ---
 
@@ -20,7 +20,7 @@ Plataforma de gerenciamento inteligente de eletropostos comerciais integrada ao 
 
 ## 🎥 Vídeo de Demonstração
 
-🔗 [Assistir no YouTube](https://youtu.be/HmwEoRm2mBw)
+🔗 [COLAR LINK DO VÍDEO NOVO AQUI]
 
 ---
 
@@ -41,18 +41,43 @@ A infraestrutura de carregamento de VEs no Brasil enfrenta barreiras críticas p
 
 ---
 
-## 💡 Nossa Proposta
+## 💡 O que foi construído (Sprint 3)
 
-O WeCharge é uma plataforma integrada de gerenciamento de eletropostos comerciais com **3 pilares**:
+Nas Sprints 1 e 2 o WeCharge era uma proposta — ainda não existia código. Na
+Sprint 3 o time construiu um **protótipo funcional real em Django**, com
+todo o fluxo de recarga simulado de ponta a ponta (sem hardware físico
+GoodWe ainda, mas com toda a lógica de negócio, cobrança e dados
+funcionando de verdade sobre banco de dados).
 
-### ⚡ 1. Dynamic Load Balancing
-Redistribui potência entre carregadores em tempo real, respeitando o limite contratado com a concessionária. Sem multas, sem desligamentos.
+### ⚡ 1. Cadastro de pontos de recarga (operador)
+O dono do eletroposto cadastra o ponto físico (nome, endereço, posição
+no mapa, tarifa por kWh) e recebe um **token de 5 caracteres + QR Code**
+gerado automaticamente para colar no equipamento.
 
-### 💳 2. Billing Integrado
-Cobrança por kWh com PIX, cartão de crédito e débito. Tarifa transparente antes e durante o carregamento. Cobrança adicional por tempo na vaga após a conclusão.
+### 🔌 2. Sessão de recarga (motorista)
+O motorista adiciona o carregador pelo token ou QR Code, libera e
+inicia a sessão. O sistema acompanha em **tempo real**: kWh entregues,
+% de bateria e custo acumulado — com cobrança adicional por tempo
+excedente na vaga após a bateria completar.
 
-### 🤖 3. IA via Groq (Llama 3)
-Dicas personalizadas por sessão: analisa o estado da bateria, comenta a meta escolhida e otimiza a distribuição de carga entre os carregadores — reduzindo o consumo desnecessário da rede e o impacto ambiental.
+### 💳 3. Pagamento
+Tela de cobrança com Pix, cartão de crédito ou débito (interface
+completa; sem gateway de pagamento real integrado ainda).
+
+### 🤖 4. WeChat — assistente de IA
+Assistente que responde perguntas como *"qual carregador mais perto de
+um McDonald's?"*: primeiro tenta casar o lugar citado com o
+nome/endereço dos próprios pontos cadastrados; se não achar, usa
+geocodificação gratuita (Nominatim/OpenStreetMap, o mesmo serviço do
+mapa) para localizar o lugar e comparar a distância com os pontos do
+banco. A IA (OpenAI) só interpreta a pergunta e formata a resposta — a
+busca e o cálculo de distância são feitos em Python puro, para não
+haver risco de a IA inventar um carregador ou distância inexistente.
+
+### 📊 5. Painel do operador
+Mostra dados agregados **reais** (não mais valores de exemplo):
+sessões em uso, energia vendida, receita e lucro estimado, apenas dos
+pontos pertencentes à conta logada.
 
 ---
 
@@ -60,29 +85,30 @@ Dicas personalizadas por sessão: analisa o estado da bateria, comenta a meta es
 
 ```
 ┌──────────────────────────────────────────────────────────┐
-│                    WeCharge Platform                     │
-│                                                          │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────────┐  │
-│  │  Inversores │  │   Baterias  │  │  Carregadores   │  │
-│  │   GoodWe    │  │   GoodWe    │  │  (OCPP 2.0)     │  │
-│  └──────┬──────┘  └──────┬──────┘  └────────┬────────┘  │
-│         └────────────────┴──────────────────┘            │
-│                           │                              │
-│               ┌───────────▼───────────┐                  │
-│               │     CSMS (Backend)    │                  │
-│               │  • Load Balancing     │                  │
-│               │  • IA Groq / Llama3   │                  │
-│               │  • Billing Engine     │                  │
-│               └───────────┬───────────┘                  │
-│          ┌────────────────┼──────────────┐               │
-│          ▼                ▼              ▼               │
-│   ┌────────────┐  ┌─────────────┐  ┌──────────────┐     │
-│   │ App Mobile │  │   Painel    │  │   Gateway    │     │
-│   │ (código ou │  │  Operador   │  │  Pagamento   │     │
-│   │  QR Code)  │  │ (Dashboard) │  │PIX/Cartão    │     │
-│   └────────────┘  └─────────────┘  └──────────────┘     │
+│                    WeCharge Platform (Django)             │
+│                                                            │
+│   contas/            painel/                operador/     │
+│  cadastro,        motorista: adicionar,    dono do ponto: │
+│  login, define    liberar, iniciar,        cadastra pontos│
+│  is_staff →        acompanhar, finalizar,   (mapa, tarifa,│
+│  painel/operador   pagar, WeChat            token/QR),    │
+│                                              vê receita     │
+│         └────────────────┬─────────────────────┘          │
+│                           │                                │
+│                  Banco de dados (SQLite)                   │
+│         PontoCarregamento  ·  Carregador (sessão)           │
 └──────────────────────────────────────────────────────────┘
 ```
+
+- **`contas`** — cadastro/login; o campo `is_staff` decide se a pessoa
+  vai para `painel` (motorista) ou `operador` (dono do ponto).
+- **`operador`** — cadastra `PontoCarregamento` (nome, endereço,
+  lat/long via mapa Leaflet, tarifa) e gera o token/QR do equipamento.
+- **`painel`** — usa o token/QR para abrir um `Carregador` (sessão),
+  acompanha em tempo real e paga ao final.
+- Todos os apps leem e gravam no mesmo banco, então o preço definido
+  pelo operador e o cobrado do motorista são sempre o mesmo dado — e
+  uma alteração de tarifa não muda uma sessão já em andamento.
 
 ---
 
@@ -90,124 +116,63 @@ Dicas personalizadas por sessão: analisa o estado da bateria, comenta a meta es
 
 | Camada | Tecnologia |
 |---|---|
-| Protocolo de comunicação | OCPP 2.0 (WebSocket + TLS) |
-| Hardware | Carregadores GoodWe, Inversores GoodWe, BESS GoodWe |
-| IA | Groq API — Llama 3 8B (dicas personalizadas por sessão) |
-| Pagamentos | PIX, Cartão de crédito, Cartão de débito |
-| App mobile | React Native (iOS + Android) |
-| Backend | API REST + CSMS |
-| Simulação (Sprint 2) | Python 3.x — sem dependências externas |
+| Backend | Django (Python) |
+| Banco de dados | SQLite (dev) |
+| Mapa / geolocalização | Leaflet + Nominatim (OpenStreetMap) |
+| IA (WeChat) | OpenAI API — interpretação de linguagem natural |
+| Pagamentos | Pix, cartão de crédito, cartão de débito (interface) |
+| Identificação do ponto | Token físico de 5 caracteres + QR Code |
+| Frontend | HTML/CSS/JS (tema escuro "voltaico") servido pelo próprio Django |
+
+> Hardware GoodWe real, protocolo OCPP e app mobile React Native fazem
+> parte da visão de produto de longo prazo do time, mas não fazem parte
+> deste protótipo — que é 100% simulado em software.
 
 ---
 
-## 🧪 Prova de Conceito — Sprint 2
+## 🧪 Como rodar o projeto
 
-### Como executar
-
-**Requisitos:** Python 3.8 ou superior. Sem bibliotecas externas necessárias.
+**Requisitos:** Python 3.10+ (recomendado).
 
 ```bash
-# Clonar o repositório
-git clone https://github.com/SEU_USUARIO/Challenge-GoodWe.git
-cd Challenge-GoodWe
-
-# Executar a simulação interativa
-python wecharge_simulacao.py
+cd wecharge_v1.12
+python -m venv venv
+# Windows: venv\Scripts\activate      Mac/Linux: source venv/bin/activate
+pip install -r requirements.txt
+python manage.py migrate
+python manage.py runserver
 ```
 
-**Para ativar a IA real (Groq):** edite o arquivo e substitua `COLE_SUA_CHAVE_GROQ_AQUI` pela sua chave gratuita em [console.groq.com](https://console.groq.com).
+Acesse `http://127.0.0.1:8000/` — a tela inicial é o site público, com
+**Entrar** / **Cadastre-se** no menu. Ao cadastrar, escolha o tipo de
+conta (Usuário ou Administrador) para cair no painel certo.
+
+(Opcional) Para ver tudo pelo admin do Django:
+```bash
+python manage.py createsuperuser
+```
+
+Veja `REGISTRO_INTEGRACAO.md` para o histórico completo de como o
+protótipo foi construído e testado (isolamento entre usuários, CSRF,
+fluxo ponta a ponta).
 
 ---
-
-### Fluxo da Simulação
-
-A simulação é **totalmente interativa** — o usuário responde as perguntas como se estivesse usando o app real.
-
-```
-MÓDULO 1 — Identificação do carregador
-  → Digitar código (ex: A-0042, B-9999) — aceita qualquer carregador cadastrado
-  → OU simular leitura de QR Code
-
-MÓDULO 2 — Estado da bateria
-  → Usuário informa % atual
-  → IA WeCharge dá dica sobre o estado e eficiência de carga
-
-MÓDULO 4 — Meta de carregamento
-  → Por percentual (ex: carregar até 80%)
-  → Por valor em R$ (ex: "quero gastar R$ 50" → sistema calcula até onde vai)
-  → IA comenta a meta com foco em eficiência e impacto ambiental
-
-MÓDULO 5 — Dynamic Load Balancing
-  → Verifica demanda total do estabelecimento
-  → Reduz potência automaticamente se necessário
-  → Garante zero multas por ultrapassagem de demanda
-
-MÓDULO 6 — Pagamento
-  → PIX, Cartão de crédito ou Cartão de débito
-  → Valor transparente antes de iniciar
-
-MÓDULO 7 — Carregamento em andamento
-  → Barra de progresso com custo parcial atualizado em tempo real
-
-MÓDULO 8 — Tempo adicional na vaga
-  → Cobra R$ 0,20/min após conclusão do carregamento
-
-RESUMO FINAL
-  → Carregador, bateria inicial/final, energia, forma de pagamento e total pago
-```
-
-### Exemplo de saída
-
-```
-══════════════════════════════════════════════════════════════
-  MÓDULO 1 — IDENTIFICAÇÃO DO CARREGADOR
-══════════════════════════════════════════════════════════════
-  [1] Digitar o código   [2] Simular QR Code
-  → B-9999
-  ✅ Carregador B-9999 encontrado! 22 kW AC | Disponível
-
-══════════════════════════════════════════════════════════════
-  MÓDULO 4 — META DE CARREGAMENTO
-══════════════════════════════════════════════════════════════
-  Meta: 80% | Energia: 36.0 kWh | Tempo: 4h 56min | R$ 43,20
-  💬 Nossa IA vai distribuir os 36.0 kWh de forma eficiente
-     entre os carregadores — menor impacto ambiental.
-
-══════════════════════════════════════════════════════════════
-  MÓDULO 7 — CARREGAMENTO EM ANDAMENTO
-══════════════════════════════════════════════════════════════
-  🔋  35%  [████████████░░░░░░░░░░░░░░░░░░░░░░░]  R$ 10,80
-  🔋  80%  [████████████████████████████░░░░░░░]  R$ 43,20
-  ✅ Carregamento concluído!
-```
-
----
-
 
 ## 📈 Impactos Esperados
 
-- ✅ Zero multas por ultrapassagem de demanda contratada
-- ✅ Monetização do eletroposto desde o primeiro mês
-- ✅ Menor consumo da rede por sessão graças à IA
-- ✅ Experiência de usuário simples: código ou QR Code → meta → pagar → carregar
+- ✅ Monetização do eletroposto desde o primeiro mês (cobrança nativa)
+- ✅ Rastreabilidade total de cada sessão de carga (kWh, custo, tempo)
+- ✅ Experiência simples: token/QR Code → liberar → carregar → pagar
+- ✅ Assistente de IA reduz atrito na hora de achar um ponto disponível
 
 ---
 
 ## 📊 Status das Sprints
 
 ### Sprint 1 — Pesquisa e Proposta ✅
-| Disciplina | Responsável | Status |
-|---|---|---|
-| Pensamento Computacional e Automação com Python | Victor | ✅ |
-| Soluções em Energias Renováveis e Sustentáveis | Victor | ✅ |
-| Modelagem Linear para Aprendizado de Máquina | Isabela | ✅ |
-| Modelagem Matemática e Computacional | Isabela | ✅ |
-| Prompt and Artificial Intelligence | Gustavo | ✅ |
-| Data Structures and Algorithms | Artur | ✅ |
-| Computer Organization and Architecture | Miguel | ✅ |
-| Computer Science | Miguel | ✅ |
+### Sprint 2 — Prova de Conceito (simulação em Python) ✅
+### Sprint 3 — Prototipagem Funcional e Integração ✅
 
-### Sprint 2 — Prova de Conceito Funcional ✅
 | Disciplina | Responsável | Status |
 |---|---|---|
 | Pensamento Computacional e Automação com Python | Victor | ✅ |
