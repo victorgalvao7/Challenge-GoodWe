@@ -1,0 +1,41 @@
+{% extends "painel/base_app.html" %}
+{% load static %}
+
+{% block title %}QR Code — {{ ponto.nome }}{% endblock %}
+
+{% block mais_head %}
+<style>
+  @media print {
+    .cabecalho, .page-head, .acoes-formulario, .mensagem-sucesso { display: none !important; }
+    body { background: #fff; }
+    .cartao-qrcode { border: none !important; box-shadow: none !important; }
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="secao-operador">
+    <div class="page-head">
+        <div>
+            <p class="eyebrow">Carregador cadastrado</p>
+            <h1>{{ ponto.nome }}</h1>
+            <p class="hint">Imprima este QR Code e cole no carregador físico. O motorista escaneia para identificá-lo automaticamente no app.</p>
+        </div>
+    </div>
+
+    {% for message in messages %}
+        <p class="mensagem-sucesso">{{ message }}</p>
+    {% endfor %}
+
+    <div class="cartao-qrcode">
+        <img src="{% url 'operador:qrcode_png' ponto_id=ponto.id %}" alt="QR Code do token {{ ponto.identificador_fisico }}" class="imagem-qrcode">
+        <p class="token-qrcode">Token: <code>{{ ponto.identificador_fisico }}</code></p>
+        <p class="hint">{{ ponto.nome }} — {{ ponto.endereco }}</p>
+    </div>
+
+    <div class="acoes-formulario">
+        <button type="button" onclick="window.print()" class="btn btn-primary">Imprimir</button>
+        <a href="{% url 'operador:painel' %}" class="btn btn-secondary">Voltar ao painel</a>
+    </div>
+</section>
+{% endblock %}

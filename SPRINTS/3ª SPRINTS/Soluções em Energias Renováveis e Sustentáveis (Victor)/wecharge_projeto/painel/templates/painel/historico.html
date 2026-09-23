@@ -1,0 +1,37 @@
+{% extends "painel/base_app.html" %}
+{% block title %}Histórico — WeCharge{% endblock %}
+{% block content %}
+<section>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Histórico</p>
+      <h1>Carregamentos concluídos</h1>
+    </div>
+    <a href="{% url 'painel:painel' %}" class="btn btn-secondary">Voltar ao painel</a>
+  </div>
+
+  {% if carregadores %}
+  <div class="charger-grid">
+    {% for c in carregadores %}
+    <a href="{% url 'painel:detalhe_carregador' charger_id=c.id %}" class="charger-card">
+      <div class="charger-card-top">
+        <span class="pill pill-concluido">Concluído</span>
+      </div>
+      <h2>{{ c.apelido }}</h2>
+      <p class="charger-card-id">ID físico: {{ c.identificador_fisico }}</p>
+      {% if c.resumo_final %}
+        <p class="charger-card-live">R$ {{ c.resumo_final.custo_total|floatformat:2 }}
+          {% if c.concluido_em %}· {{ c.concluido_em|date:"d/m/Y" }}{% endif %}
+        </p>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <p>Você ainda não concluiu nenhum carregamento.</p>
+    <a href="{% url 'painel:painel' %}" class="btn btn-primary">Voltar ao painel</a>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}

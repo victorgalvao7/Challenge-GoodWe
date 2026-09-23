@@ -1,0 +1,119 @@
+{% extends "painel/base_app.html" %}
+{% load static %}
+{% block title %}{{ carregador.apelido }} — WeCharge{% endblock %}
+{% block content %}
+<section>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Carregador</p>
+      <h1>{{ carregador.apelido }}</h1>
+      <p class="hint">ID físico: {{ carregador.identificador_fisico }}</p>
+    </div>
+  </div>
+
+<div class="charger-detail"
+     data-charger-id="{{ carregador.id }}"
+     data-status="{{ carregador.status }}"
+     data-api-iniciar="{% url 'painel:api_iniciar' charger_id=carregador.id %}"
+     data-api-finalizar="{% url 'painel:api_finalizar' charger_id=carregador.id %}"
+     data-api-status="{% url 'painel:api_status' charger_id=carregador.id %}"
+     data-api-reutilizar="{% url 'painel:api_reutilizar' charger_id=carregador.id %}"
+     data-url-pagamento="{% url 'painel:pagamento' charger_id=carregador.id %}"
+     data-url-detalhe="{% url 'painel:detalhe_carregador' charger_id=carregador.id %}">
+
+  {% if carregador.status == 'adicionado' or carregador.status == 'liberado' %}
+  <div class="state-card">
+    <p>Carregador conectado. Toque em iniciar quando estiver pronto para carregar.</p>
+    <button class="btn btn-primary" id="btn-iniciar">Iniciar carregamento</button>
+  </div>
+  {% endif %}
+
+  {% if carregador.status == 'carregando' %}
+  <div class="charging-panel">
+    <div class="power-ring-wrap">
+      <svg viewBox="0 0 200 200" class="power-ring">
+        <circle cx="100" cy="100" r="88" class="ring-track"/>
+        <circle cx="100" cy="100" r="88" class="ring-progress" id="ring-progress"/>
+      </svg>
+      <div class="power-ring-center">
+        <span class="ring-percent" id="pct-bateria">0%</span>
+        <span class="ring-label">bateria</span>
+      </div>
+    </div>
+    <div class="charging-readouts">
+      <div class="readout">
+        <span class="readout-label">Tempo de carregamento</span>
+        <span class="readout-value mono" id="tempo-decorrido">00:00:00</span>
+      </div>
+      <div class="readout">
+        <span class="readout-label">Energia consumida</span>
+        <span class="readout-value mono" id="energia-kwh">0.000 kWh</span>
+      </div>
+      <div class="readout">
+        <span class="readout-label">Custo até agora</span>
+        <span class="readout-value mono" id="custo-total">R$ 0,00</span>
+      </div>
+      <div class="readout readout-overtime hidden" id="bloco-excedente">
+        <span class="readout-label">Tempo excedente (bateria já cheia)</span>
+        <span class="readout-value mono" id="tempo-excedente">00:00:00</span>
+      </div>
+    </div>
+    <button class="btn btn-danger" id="btn-finalizar">Finalizar carregamento</button>
+  </div>
+  {% endif %}
+
+  {% if carregador.status == 'aguardando_pagamento' %}
+  <div class="state-card">
+    <p>Carregamento finalizado. Falta só o pagamento.</p>
+    <a href="{% url 'painel:pagamento' charger_id=carregador.id %}" class="btn btn-primary">Ver cobrança e pagar</a>
+  </div>
+  {% endif %}
+
+  {% if carregador.status == 'concluido' %}
+  <div class="invoice">
+    <div class="invoice-row">
+      <span>Tempo de carregamento</span>
+      <span class="mono">{{ tempo_decorrido_fmt }}</span>
+    </div>
+    <div class="invoice-row">
+      <span>Energia consumida</span>
+      <span class="mono">{{ resumo.energia_kwh|floatformat:3 }} kWh</span>
+    </div>
+    {% if resumo.tempo_excedente_s %}
+    <div class="invoice-row">
+      <span>Tempo excedente (bateria já cheia)</span>
+      <span class="mono">{{ excedente_min }} min {{ excedente_seg }}s</span>
+    </div>
+    {% endif %}
+    <div class="invoice-divider"></div>
+    <div class="invoice-row invoice-total">
+      <span>Total pago</span>
+      <span class="mono">R$ {{ resumo.custo_total|floatformat:2 }}</span>
+    </div>
+    <div class="invoice-row invoice-note">
+      <span>
+        Pago via
+        {% if forma_pagamento == 'pix' %}Pix
+        {% elif forma_pagamento == 'credito' %}cartão de crédito
+        {% elif forma_pagamento == 'debito' %}cartão de débito
+        {% endif %}
+        {% if concluido_em %}em {{ concluido_em|date:"d/m/Y \à\s H:i" }}{% endif %}
+      </span>
+    </div>
+  </div>
+
+  <div class="state-card">
+    <p>Sessão concluída e paga. Obrigado por usar a WeCharge!</p>
+    <div class="acoes-concluido">
+      <button class="btn btn-primary" id="btn-reutilizar">Usar este carregador de novo</button>
+      <a href="{% url 'painel:historico' %}" class="btn btn-secondary">Ver histórico</a>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'painel/js/carregador.js' %}"></script>
+{% endblock %}

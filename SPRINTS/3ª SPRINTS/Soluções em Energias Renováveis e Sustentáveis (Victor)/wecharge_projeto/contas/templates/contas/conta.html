@@ -1,0 +1,58 @@
+{% extends "paginas/base.html" %}
+
+{% block title %}Conta{% endblock %}
+
+{% block content %}
+    <section class="caixa-login">
+        <p class="eyebrow">Sua conta</p>
+        <h1>Dados da conta</h1>
+
+        {% if messages %}
+            {% for mensagem in messages %}
+                <p class="mensagem-erro" style="color: var(--cor-primaria-forte); background: var(--cor-primaria-clara);">{{ mensagem }}</p>
+            {% endfor %}
+        {% endif %}
+
+        {% if form.errors %}
+            <div class="mensagem-erro">
+                <strong>Não foi possível salvar:</strong>
+                <ul>
+                    {% for campo in form %}
+                        {% for erro in campo.errors %}
+                            <li>{{ campo.label }}: {{ erro }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="post" class="formulario-contato">
+            {% csrf_token %}
+
+            <label for="{{ form.nome_completo.id_for_label }}">Nome completo</label>
+            {{ form.nome_completo }}
+
+            <label for="{{ form.email.id_for_label }}">E-mail</label>
+            {{ form.email }}
+
+            <label for="{{ form.telefone.id_for_label }}">Telefone (opcional)</label>
+            {{ form.telefone }}
+
+            <label for="{{ form.cidade.id_for_label }}">Cidade (opcional)</label>
+            {{ form.cidade }}
+
+            <button type="submit">Salvar alterações</button>
+        </form>
+
+        {% if not user.is_staff %}
+        <p class="texto-auxiliar" style="margin-top: 22px;">
+            <a href="{% url 'painel:historico' %}">Ver histórico de carregamentos →</a>
+        </p>
+        {% endif %}
+
+        <form method="post" action="{% url 'contas:logout' %}" class="form-sair" style="margin-top: 26px; display: block;">
+            {% csrf_token %}
+            <button type="submit" class="botao-sair">Sair</button>
+        </form>
+    </section>
+{% endblock %}

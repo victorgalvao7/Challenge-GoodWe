@@ -1,0 +1,69 @@
+{% extends "paginas/base.html" %}
+
+{% block title %}Criar conta{% endblock %}
+
+{% block content %}
+    <section class="caixa-login">
+        <h1>Criar conta</h1>
+
+        {% if form.errors %}
+            <div class="mensagem-erro">
+                <strong>Não foi possível criar a conta:</strong>
+                <ul>
+                    {% for campo in form %}
+                        {% for erro in campo.errors %}
+                            <li>{{ campo.label }}: {{ erro }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for erro in form.non_field_errors %}
+                        <li>{{ erro }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <form method="post" class="formulario-contato">
+            {% csrf_token %}
+
+            <label for="{{ form.nome_completo.id_for_label }}">Nome completo</label>
+            {{ form.nome_completo }}
+            {% if form.nome_completo.errors %}<p class="mensagem-erro">{{ form.nome_completo.errors.0 }}</p>{% endif %}
+
+            <label for="{{ form.email.id_for_label }}">E-mail</label>
+            {{ form.email }}
+            {% if form.email.errors %}<p class="mensagem-erro">{{ form.email.errors.0 }}</p>{% endif %}
+
+            <label for="{{ form.telefone.id_for_label }}">Telefone (opcional)</label>
+            {{ form.telefone }}
+
+            <label for="{{ form.cidade.id_for_label }}">Cidade (opcional)</label>
+            {{ form.cidade }}
+
+            <label for="{{ form.username.id_for_label }}">Usuário (login)</label>
+            {{ form.username }}
+            {% if form.username.errors %}<p class="mensagem-erro">{{ form.username.errors.0 }}</p>{% endif %}
+
+            <label for="{{ form.senha.id_for_label }}">Senha</label>
+            {{ form.senha }}
+            {% if form.senha.errors %}<p class="mensagem-erro">{{ form.senha.errors.0 }}</p>{% endif %}
+
+            <label for="{{ form.confirmar_senha.id_for_label }}">Confirmar senha</label>
+            {{ form.confirmar_senha }}
+            {% if form.confirmar_senha.errors %}<p class="mensagem-erro">{{ form.confirmar_senha.errors.0 }}</p>{% endif %}
+
+            <fieldset class="grupo-radio">
+                <legend>Tipo de conta</legend>
+                {% for radio in form.tipo_conta %}
+                    <label class="opcao-radio">{{ radio.tag }} {{ radio.choice_label }}</label>
+                {% endfor %}
+                {% if form.tipo_conta.errors %}<p class="mensagem-erro">{{ form.tipo_conta.errors.0 }}</p>{% endif %}
+            </fieldset>
+
+            <button type="submit">Criar conta</button>
+        </form>
+
+        <p class="texto-auxiliar">
+            Já tem conta? <a href="{% url 'contas:login' %}">Entrar</a>
+        </p>
+    </section>
+{% endblock %}

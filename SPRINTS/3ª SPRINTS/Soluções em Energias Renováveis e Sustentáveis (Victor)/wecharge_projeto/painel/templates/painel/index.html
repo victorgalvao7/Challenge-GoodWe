@@ -1,0 +1,113 @@
+{% extends "painel/base_app.html" %}
+{% load static %}
+{% block title %}Seus carregamentos — WeCharge{% endblock %}
+
+{% block mais_head %}
+<link rel="stylesheet" href="{% static 'painel/vendor/leaflet/leaflet.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Perto de você</p>
+      <h1>Carregadores próximos</h1>
+      <p class="hint">Mostramos sua localização em tempo real e os carregadores já cadastrados na região.</p>
+    </div>
+  </div>
+
+  <div class="busca-endereco">
+    <input type="text" id="busca-endereco-input" placeholder="Digite um endereço para ver a região no mapa" autocomplete="off">
+    <button type="button" id="busca-endereco-botao" class="btn btn-secondary">Buscar</button>
+  </div>
+  <div class="mapa-wrap">
+    <div id="mapa-proximos" class="mapa-proximos" data-api-proximos="{% url 'painel:api_carregadores_proximos' %}" data-url-adicionar="{% url 'painel:adicionar' %}"></div>
+    {% if ioi_chat_disponivel %}
+    <button id="btn-ioi-chat" class="btn-ioi-chat" type="button" aria-label="Abrir Wechat" title="Perguntar ao Wechat">
+      💬 Wechat
+    </button>
+    {% endif %}
+  </div>
+  <p id="mapa-aviso" class="hint mapa-aviso hidden"></p>
+  <div class="mapa-legenda">
+    <span><i class="ponto ponto-voce"></i> Você</span>
+    <span><i class="ponto ponto-disponivel"></i> Disponível</span>
+    <span><i class="ponto ponto-em-uso"></i> Em uso</span>
+  </div>
+
+  {% if ioi_chat_disponivel %}
+  <div id="ioi-chat-painel" class="ioi-chat-painel hidden" data-api-chat="{% url 'painel:api_ioi_chat' %}">
+    <div class="ioi-chat-cabecalho">
+      <span>💬 Wechat</span>
+      <button id="btn-fechar-ioi-chat" type="button" aria-label="Fechar">✕</button>
+    </div>
+    <div id="ioi-chat-mensagens" class="ioi-chat-mensagens">
+      <div class="ioi-chat-bolha ioi-chat-bolha-ia">
+        Oi! Pergunte algo como <em>"qual carregador mais próximo de um McDonald's?"</em> ou até só <em>"qual o carregador mais próximo de mim?"</em> que eu já mostro ele no mapa com a rota até lá. Se estiver dirigindo, aperte o microfone e fale — eu respondo em voz alta também.
+      </div>
+    </div>
+    <form id="ioi-chat-form" class="ioi-chat-form">
+      <button type="button" id="btn-ioi-chat-mic" class="btn-mic" aria-label="Falar com o Wechat" title="Falar com o Wechat">🎤</button>
+      <div id="ioi-chat-campo-normal" class="ioi-chat-campo-normal">
+        <input type="text" id="ioi-chat-input" placeholder="Pergunte ao Wechat..." maxlength="500" autocomplete="off">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+      </div>
+      <div id="ioi-chat-ouvindo" class="ioi-chat-ouvindo hidden" aria-live="polite">
+        <span class="ponto-gravando" aria-hidden="true"></span>
+        <span class="onda-audio" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span class="ioi-chat-ouvindo-texto">Ouvindo... pode falar</span>
+      </div>
+    </form>
+  </div>
+  {% endif %}
+</section>
+
+<section>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Painel</p>
+      <h1>Seus carregamentos</h1>
+    </div>
+    <div class="page-head-acoes">
+      <a href="{% url 'painel:historico' %}" class="btn btn-secondary">Histórico</a>
+      <a href="{% url 'painel:adicionar' %}" class="btn btn-primary">+ Adicionar carregador</a>
+    </div>
+  </div>
+
+  {% if carregadores %}
+  <div class="charger-grid">
+    {% for c in carregadores %}
+    <a href="{% url 'painel:detalhe_carregador' charger_id=c.id %}" class="charger-card status-{{ c.status }}">
+      <div class="charger-card-top">
+        <span class="pill pill-{{ c.status }}">
+          {% if c.status == 'adicionado' %}Aguardando liberação
+          {% elif c.status == 'liberado' %}Liberado
+          {% elif c.status == 'carregando' %}Carregando
+          {% elif c.status == 'aguardando_pagamento' %}Pagamento pendente
+          {% elif c.status == 'concluido' %}Concluído
+          {% endif %}
+        </span>
+      </div>
+      <h2>{{ c.apelido }}</h2>
+      <p class="charger-card-id">ID físico: {{ c.identificador_fisico }}</p>
+      {% if c.status == 'carregando' %}
+        <p class="charger-card-live">{{ c.percentual_bateria }}% · R$ {{ c.custo_total_parcial|floatformat:2 }}</p>
+      {% endif %}
+    </a>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="empty-state">
+    <p>Você ainda não adicionou nenhum carregador.</p>
+    <a href="{% url 'painel:adicionar' %}" class="btn btn-primary">Adicionar meu primeiro carregador</a>
+  </div>
+  {% endif %}
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'painel/vendor/leaflet/leaflet.js' %}"></script>
+<script src="{% static 'painel/js/mapa.js' %}"></script>
+{% if ioi_chat_disponivel %}
+<script src="{% static 'painel/js/ioi_chat.js' %}"></script>
+{% endif %}
+{% endblock %}

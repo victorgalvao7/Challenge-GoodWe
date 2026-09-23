@@ -1,0 +1,197 @@
+{% extends "painel/base_app.html" %}
+{% load static %}
+
+{% block title %}Painel do Operador{% endblock %}
+
+{% block mais_head %}
+<link rel="stylesheet" href="{% static 'painel/vendor/leaflet/leaflet.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="secao-operador">
+    <div class="page-head">
+        <div>
+            <p class="eyebrow">Administração</p>
+            <h1>Painel do Operador</h1>
+            <p class="hint">Cadastre seus carregadores, defina o preço da energia e acompanhe a renda.</p>
+        </div>
+        <div class="page-head-acoes">
+            <a href="#cadastro-carregador" class="btn btn-primary">+ Cadastrar carregador</a>
+        </div>
+    </div>
+
+    {% for message in messages %}
+        <p class="mensagem-sucesso">{{ message }}</p>
+    {% endfor %}
+
+    <div id="cadastro-carregador" class="bloco-cadastro-operador">
+        <div>
+            <p class="eyebrow">Novo ponto</p>
+            <h2>Cadastrar carregador</h2>
+            <p class="hint">Preencha os dados e clique no mapa para marcar onde o carregador ficará.</p>
+        </div>
+
+        <form method="post" action="{% url 'operador:painel' %}#cadastro-carregador" class="formulario-contato formulario-operador" novalidate>
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="mensagem-erro">{{ form.non_field_errors }}</div>
+            {% endif %}
+
+            <div class="cadastro-operador-grid">
+                <div class="cadastro-operador-campos">
+                    <label for="{{ form.nome.id_for_label }}">{{ form.nome.label }}</label>
+                    {{ form.nome }}
+                    {% for error in form.nome.errors %}<p class="mensagem-erro">{{ error }}</p>{% endfor %}
+                    <p class="hint ajuda-campo">O token do carregador é gerado automaticamente ao cadastrar — você não precisa escolher.</p>
+
+                    {% if form.quantidade %}
+                    <label for="{{ form.quantidade.id_for_label }}">{{ form.quantidade.label }}</label>
+                    {{ form.quantidade }}
+                    {% if form.quantidade.help_text %}<p class="hint ajuda-campo">{{ form.quantidade.help_text }}</p>{% endif %}
+                    {% for error in form.quantidade.errors %}<p class="mensagem-erro">{{ error }}</p>{% endfor %}
+                    {% endif %}
+
+                    <label for="{{ form.endereco.id_for_label }}">{{ form.endereco.label }}</label>
+                    {{ form.endereco }}
+                    {% for error in form.endereco.errors %}<p class="mensagem-erro">{{ error }}</p>{% endfor %}
+
+                    <label for="{{ form.preco_kwh.id_for_label }}">{{ form.preco_kwh.label }}</label>
+                    {{ form.preco_kwh }}
+                    {% if form.preco_kwh.help_text %}<p class="hint ajuda-campo">{{ form.preco_kwh.help_text }}</p>{% endif %}
+                    {% for error in form.preco_kwh.errors %}<p class="mensagem-erro">{{ error }}</p>{% endfor %}
+
+                    <label class="opcao-radio" for="{{ form.ativo.id_for_label }}">
+                        {{ form.ativo }}
+                        <span>{{ form.ativo.label }}</span>
+                    </label>
+                    {% for error in form.ativo.errors %}<p class="mensagem-erro">{{ error }}</p>{% endfor %}
+                </div>
+
+                <div class="cadastro-operador-mapa">
+                    <div class="busca-endereco">
+                        <input type="text" id="busca-endereco-input" placeholder="Digite um endereço para localizar no mapa" autocomplete="off">
+                        <button type="button" id="busca-endereco-botao" class="btn btn-secondary">Buscar</button>
+                    </div>
+                    <div id="mapa-cadastro" class="mapa-cadastro"></div>
+                    <button type="button" id="usar-localizacao" class="btn btn-secondary btn-localizacao">Usar minha localização atual</button>
+
+                    <div class="coordenadas-grid">
+                        <div>
+                            <label for="{{ form.latitude.id_for_label }}">{{ form.latitude.label }}</label>
+                            {{ form.latitude }}
+                            {% for error in form.latitude.errors %}<p class="mensagem-erro">{{ error }}</p>{% endfor %}
+                        </div>
+                        <div>
+                            <label for="{{ form.longitude.id_for_label }}">{{ form.longitude.label }}</label>
+                            {{ form.longitude }}
+                            {% for error in form.longitude.errors %}<p class="mensagem-erro">{{ error }}</p>{% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Cadastrar carregador</button>
+        </form>
+    </div>
+
+    <div class="cartao">
+        <h2>Demanda atual</h2>
+        <p><strong>{{ potencia_total_kw }} kW</strong> em uso de <strong>{{ limite_contratado_kw }} kW</strong> contratados</p>
+        <div class="barra-progresso">
+            <div class="barra-progresso-preenchida" style="width: {% widthratio potencia_total_kw limite_contratado_kw 100 %}%;"></div>
+        </div>
+    </div>
+
+    <h2>Meus carregadores</h2>
+    {% if pontos %}
+    <table class="tabela-carregadores tabela-operador">
+        <thead>
+            <tr>
+                <th>Carregador</th>
+                <th>Token</th>
+                <th>Localização</th>
+                <th>Preço</th>
+                <th>Status</th>
+                <th>Receita</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ponto in pontos %}
+            <tr>
+                <td>{{ ponto.objeto.nome }}</td>
+                <td><code>{{ ponto.objeto.identificador_fisico }}</code></td>
+                <td>{{ ponto.objeto.endereco }}</td>
+                <td>R$ {{ ponto.objeto.preco_kwh|floatformat:2 }}/kWh</td>
+                <td>{{ ponto.status }}</td>
+                <td>R$ {{ ponto.receita_total|floatformat:2 }}</td>
+                <td>
+                    <div class="acoes-tabela">
+                        <a href="{% url 'operador:imprimir_qrcode' ponto_id=ponto.objeto.id %}" class="btn btn-secondary btn-compacto">QR Code</a>
+                        <a href="{% url 'operador:editar_ponto' ponto_id=ponto.objeto.id %}" class="btn btn-secondary btn-compacto">Editar</a>
+                        <form method="post" action="{% url 'operador:alternar_ponto' ponto_id=ponto.objeto.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-compacto {% if ponto.objeto.ativo %}btn-danger{% else %}btn-primary{% endif %}">
+                                {% if ponto.objeto.ativo %}Desativar{% else %}Ativar{% endif %}
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+        <p>Você ainda não cadastrou nenhum carregador físico.</p>
+        <a href="{% url 'operador:adicionar_ponto' %}" class="btn btn-primary">Cadastrar primeiro carregador</a>
+    </div>
+    {% endif %}
+</section>
+
+<section class="secao-operador">
+    <h2>Sessões ativas</h2>
+    <p class="texto-auxiliar">Recargas abertas nos carregadores desta conta.</p>
+    {% if carregadores %}
+    <table class="tabela-carregadores tabela-operador">
+        <thead>
+            <tr>
+                <th>Carregador</th>
+                <th>Cliente</th>
+                <th>Status</th>
+                <th>Potência</th>
+                <th>Energia consumida</th>
+                <th>Receita (sessão)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for carregador in carregadores %}
+            <tr>
+                <td>{{ carregador.ponto }} <small>{{ carregador.codigo }}</small></td>
+                <td>{{ carregador.usuario }}</td>
+                <td>{{ carregador.status }}</td>
+                <td>{{ carregador.potencia_kw }} kW</td>
+                <td>{% if carregador.energia_kwh is not None %}{{ carregador.energia_kwh }} kWh{% else %}—{% endif %}</td>
+                <td>{% if carregador.custo_total_parcial is not None %}R$ {{ carregador.custo_total_parcial }}{% else %}—{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p class="texto-auxiliar">Nenhuma sessão em uso no momento.</p>
+    {% endif %}
+
+    <h2>Renda acumulada</h2>
+    <p class="texto-auxiliar">Somente sessões concluídas e pagas nos seus carregadores.</p>
+    <div class="cartao">
+        <p><strong>Energia total consumida:</strong> {{ energia_total_kwh }} kWh</p>
+        <p><strong>Receita total:</strong> R$ {{ receita_total|floatformat:2 }}</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'painel/vendor/leaflet/leaflet.js' %}"></script>
+<script src="{% static 'operador/js/ponto_form.js' %}"></script>
+{% endblock %}

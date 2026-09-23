@@ -1,0 +1,10 @@
+Equipe WeCharge
+
+Victor - RM 571483
+Miguel - RM 568873
+Isabela - RM 569196
+Gustavo - RM 569287
+Artur - RM 570880
+
+Video (YouTube, nao listado): https://youtu.be/ihh1cUt9J-I
+Repositorio GitHub: https://github.com/victorgalvao7/Challenge-GoodWe/tree/main/SPRINTS/3%C2%AA%20SPRINTS/Pensamento%20Computacional%20e%20Automa%C3%A7%C3%A3o%20com%20Python%20(Victor)

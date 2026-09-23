@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}WeCharge{% endblock %} | WeCharge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'paginas/css/estilos.css' %}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+
+    {# Formulário invisível apenas para garantir que o cookie CSRF exista em qualquer página #}
+    <form id="csrf-form" class="oculto">{% csrf_token %}</form>
+
+    <header class="cabecalho">
+        <div class="container">
+            <a href="{% url 'paginas:home' %}" class="logo">WeCharge</a>
+            <nav class="navegacao">
+                <a href="{% url 'paginas:suporte' %}">Suporte</a>
+                {% if user.is_authenticated %}
+                    {% if user.is_staff %}
+                        <a href="{% url 'operador:painel' %}">Painel do Operador</a>
+                    {% else %}
+                        <a href="{% url 'painel:painel' %}">Meu Painel</a>
+                    {% endif %}
+                    <a href="{% url 'contas:conta' %}">Conta</a>
+                {% else %}
+                    <a href="{% url 'contas:login' %}">Entrar</a>
+                {% endif %}
+            </nav>
+        </div>
+    </header>
+
+    <main class="conteudo">
+        <div class="container">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </main>
+
+    <footer class="rodape">
+        <div class="container">
+            <p>&copy; {% now "Y" %} WeCharge. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>
