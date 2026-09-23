@@ -110,9 +110,10 @@ flowchart TD
   estimado por ponto pertencente à conta.
 - Histórico de sessões concluídas fica salvo por usuário
   (`painel/historico.html`), com valor final pago.
-- *(Espaço reservado — colar aqui prints do painel, do mapa com os
-  pontos cadastrados e do histórico de sessões antes de gerar o PDF
-  final.)*
+- <img width="1404" height="885" alt="image" src="https://github.com/user-attachments/assets/ab45e910-e775-45c0-be0d-e40235ce032e" />
+- <img width="1530" height="921" alt="image" src="https://github.com/user-attachments/assets/926a54d9-f6e2-4e6d-ac31-8d906d7d6226" />
+- <img width="1445" height="949" alt="image" src="https://github.com/user-attachments/assets/b7a00ada-e558-4c35-8c68-050c0374b7c4" />
+
 
 ## 5. Conexão com os conteúdos da disciplina
 
