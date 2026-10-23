@@ -3,7 +3,7 @@
 **Sprint 4 — Solução Final Integrada e Inovadora (GoodWe EV Challenge 2026 · FIAP)**
 Entrega válida para: *Pensamento Computacional e Automação com Python* e *Soluções em Energias Renováveis e Sustentáveis*.
 
-🎥 **Vídeo técnico (YouTube, não listado):** [\[COLAR LINK AQUI\]](https://youtu.be/ihh1cUt9J-I)
+🎥 **Vídeo técnico (YouTube, não listado):** [\[LINK YOUTUBE\]](https://youtu.be/ihh1cUt9J-I)
 
 ---
 
