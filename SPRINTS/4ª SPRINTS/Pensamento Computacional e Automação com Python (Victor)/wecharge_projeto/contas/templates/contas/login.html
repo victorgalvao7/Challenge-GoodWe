@@ -1,0 +1,43 @@
+{% extends "paginas/base.html" %}
+
+{% block title %}Entrar{% endblock %}
+
+{% block content %}
+    <section class="tela-login">
+        <div class="cartao-login">
+            <div class="cartao-login-marca">
+                <span class="cartao-login-raio">⚡</span>
+                <span>WeCharge</span>
+            </div>
+
+            <h1>Entrar na sua conta</h1>
+            <p class="hint">Acompanhe seus carregamentos ou gerencie seus carregadores.</p>
+
+            {% if form.errors %}
+                <p class="mensagem-erro">Usuário ou senha incorretos. Tente novamente.</p>
+            {% endif %}
+
+            <form method="post" class="formulario-login">
+                {% csrf_token %}
+
+                <label for="{{ form.username.id_for_label }}" class="rotulo-oculto">Usuário ou e-mail</label>
+                <div class="campo-com-icone">
+                    <span class="campo-icone" aria-hidden="true">＠</span>
+                    {{ form.username }}
+                </div>
+
+                <label for="{{ form.password.id_for_label }}" class="rotulo-oculto">Senha</label>
+                <div class="campo-com-icone">
+                    <span class="campo-icone" aria-hidden="true">🔒</span>
+                    {{ form.password }}
+                </div>
+
+                <button type="submit" class="botao-login">Entrar</button>
+            </form>
+
+            <div class="cartao-login-divisor"><span>ou</span></div>
+
+            <a href="{% url 'contas:cadastro' %}" class="botao-login botao-login-secundario">Criar conta gratuita</a>
+        </div>
+    </section>
+{% endblock %}

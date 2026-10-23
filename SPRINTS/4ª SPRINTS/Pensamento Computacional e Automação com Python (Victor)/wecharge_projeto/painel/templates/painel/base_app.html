@@ -1,0 +1,12 @@
+{% extends "paginas/base.html" %}
+{% load static %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'painel/css/style.css' %}">
+{% block mais_head %}{% endblock %}
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'painel/js/main.js' %}"></script>
+{% block extra_scripts %}{% endblock %}
+{% endblock %}

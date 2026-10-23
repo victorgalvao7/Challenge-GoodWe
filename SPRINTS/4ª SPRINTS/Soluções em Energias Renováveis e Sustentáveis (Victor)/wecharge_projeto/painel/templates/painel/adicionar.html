@@ -1,0 +1,43 @@
+{% extends "painel/base_app.html" %}
+{% load static %}
+{% block title %}Adicionar carregador — WeCharge{% endblock %}
+{% block content %}
+<section>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Novo carregador</p>
+      <h1>Como você quer identificar o carregador?</h1>
+    </div>
+  </div>
+
+  <div class="tabs-root"
+       data-api-add="{% url 'painel:api_add_charger' %}"
+       data-url-carregador-base="{% url 'painel:painel' %}carregador/">
+
+  <div class="tabs">
+    <button class="tab-btn active" data-tab="qrcode">Ler QR Code</button>
+    <button class="tab-btn" data-tab="token">Digitar token</button>
+  </div>
+
+  <div class="tab-panel" id="panel-qrcode">
+    <p class="hint">Aponte a câmera para o QR Code impresso no carregador.</p>
+    <div id="qr-reader"></div>
+    <p id="qr-feedback" class="feedback"></p>
+  </div>
+
+  <div class="tab-panel hidden" id="panel-token">
+    <p class="hint">Digite o token de até 5 caracteres (letras e números) que está no carregador.</p>
+    <form id="token-form" class="token-form">
+      <input type="text" id="token-input" maxlength="5" placeholder="EX: A1B2C" autocomplete="off">
+      <button type="submit" class="btn btn-primary">Adicionar carregador</button>
+    </form>
+    <p id="token-feedback" class="feedback"></p>
+  </div>
+
+  </div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="https://unpkg.com/html5-qrcode@2.3.8/html5-qrcode.min.js"></script>
+<script src="{% static 'painel/js/adicionar.js' %}"></script>
+{% endblock %}

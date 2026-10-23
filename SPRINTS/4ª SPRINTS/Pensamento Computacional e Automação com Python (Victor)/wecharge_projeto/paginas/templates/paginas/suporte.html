@@ -1,0 +1,70 @@
+{% extends "paginas/base.html" %}
+{% load static %}
+
+{% block title %}Suporte{% endblock %}
+
+{% block content %}
+<section>
+    <p class="eyebrow">Central de ajuda</p>
+    <h1>Suporte WeCharge</h1>
+    <p class="hint">Confira as perguntas mais comuns abaixo. Se não resolver, pergunte pro nosso chat de dúvidas.</p>
+
+    <div class="faq-lista">
+        <details class="faq-item" open>
+            <summary>Como eu cadastro/adiciono um carregador na minha conta?</summary>
+            <p>No "Meu Painel", clique em "+ Adicionar carregador" e informe o token de 5 caracteres (ou leia o QR Code) que está impresso no carregador físico.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Como eu inicio a recarga?</summary>
+            <p>Depois de adicionar o carregador, clique em "Iniciar carregamento" na tela do carregador.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Como funciona o pagamento?</summary>
+            <p>Ao final da recarga, o app calcula o valor (R$/kWh consumido, mais eventual cobrança por tempo excedente) e você paga por Pix, crédito ou débito na própria tela de pagamento.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Esqueci minha senha, e agora?</summary>
+            <p>Ainda não temos recuperação automática de senha — escreva pra gente pelo e-mail de suporte que ajudamos a redefinir.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Sou dono de um ponto de recarga, como cadastro para outras pessoas usarem?</summary>
+            <p>Crie uma conta do tipo "Administrador" e cadastre o ponto no "Painel do Operador", com nome, token, endereço e preço por kWh.</p>
+        </details>
+        <details class="faq-item">
+            <summary>Onde vejo meu histórico de recargas?</summary>
+            <p>Em "Conta" &gt; "Histórico de carregamentos", ou pelo botão "Histórico" no Meu Painel.</p>
+        </details>
+    </div>
+
+    <div class="page-head" style="margin-top: 32px;">
+        <div>
+            <p class="eyebrow">Ainda com dúvida?</p>
+            <h2>Fale com o Suporte</h2>
+            <p class="hint">Pergunte aqui embaixo. Se preferir falar com uma pessoa, é só pedir.</p>
+        </div>
+    </div>
+
+    <div id="suporte-chat-painel" class="suporte-chat-painel" data-api-chat="{% url 'paginas:api_suporte_chat' %}">
+        <div class="suporte-chat-cabecalho">
+            <span class="suporte-chat-cabecalho-icone" aria-hidden="true">🎧</span>
+            <div class="suporte-chat-cabecalho-textos">
+                <strong>Suporte WeCharge</strong>
+                <span><span class="suporte-chat-status-ponto" aria-hidden="true"></span> Online agora</span>
+            </div>
+        </div>
+        <div id="suporte-chat-mensagens" class="suporte-chat-mensagens">
+            <div class="suporte-chat-bolha suporte-chat-bolha-ia">
+                Oi! Pode perguntar coisas como <em>"como eu pago a recarga?"</em>. Se preferir falar com uma pessoa da equipe, é só pedir.
+            </div>
+        </div>
+        <form id="suporte-chat-form" class="suporte-chat-form">
+            <input type="text" id="suporte-chat-input" placeholder="Digite sua dúvida..." maxlength="500" autocomplete="off">
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'paginas/js/suporte_chat.js' %}"></script>
+{% endblock %}

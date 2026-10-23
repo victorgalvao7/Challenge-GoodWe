@@ -1,0 +1,68 @@
+{% extends "painel/base_app.html" %}
+{% load static %}
+{% block title %}Pagamento — WeCharge{% endblock %}
+{% block content %}
+<section>
+  <div class="page-head">
+    <div>
+      <p class="eyebrow">Cobrança</p>
+      <h1>Resumo da sua recarga</h1>
+    </div>
+  </div>
+
+<div class="invoice">
+  <div class="invoice-row">
+    <span>Potência do carregador</span>
+    <span class="mono">{{ r.potencia_kw }} kW</span>
+  </div>
+  <div class="invoice-row">
+    <span>Energia consumida</span>
+    <span class="mono">{{ r.energia_kwh|floatformat:3 }} kWh</span>
+  </div>
+  <div class="invoice-row">
+    <span>Tarifa de energia</span>
+    <span class="mono">R$ {{ r.tarifa_kwh|floatformat:4 }} / kWh</span>
+  </div>
+  <div class="invoice-row invoice-subtotal">
+    <span>Valor da energia</span>
+    <span class="mono">R$ {{ r.custo_energia|floatformat:2 }}</span>
+  </div>
+
+  {% if r.tempo_excedente_s %}
+  <div class="invoice-divider"></div>
+  <div class="invoice-row invoice-note">
+    <span>Veículo carregado, mas retirado depois do previsto — o tempo extra é cobrado como se a mesma energia continuasse sendo consumida.</span>
+  </div>
+  <div class="invoice-row">
+    <span>Tempo excedente</span>
+    <span class="mono">{{ excedente_min }} min {{ excedente_seg }}s</span>
+  </div>
+  <div class="invoice-row invoice-subtotal">
+    <span>Valor do tempo excedente</span>
+    <span class="mono">R$ {{ r.custo_excedente|floatformat:2 }}</span>
+  </div>
+  {% endif %}
+
+  <div class="invoice-divider"></div>
+  <div class="invoice-row invoice-total">
+    <span>Total a pagar</span>
+    <span class="mono">R$ {{ r.custo_total|floatformat:2 }}</span>
+  </div>
+</div>
+
+<div class="payment-methods"
+     data-api-pagar="{% url 'painel:api_pagar' charger_id=carregador.id %}"
+     data-url-sucesso="{% url 'painel:pagamento_sucesso' charger_id=carregador.id %}">
+  <p class="hint">Escolha a forma de pagamento</p>
+  <div class="method-options">
+    <button class="method-btn" data-metodo="pix">Pix</button>
+    <button class="method-btn" data-metodo="credito">Cartão de crédito</button>
+    <button class="method-btn" data-metodo="debito">Cartão de débito</button>
+  </div>
+  <button class="btn btn-primary btn-pagar" id="btn-pagar" disabled>Pagar</button>
+</div>
+</section>
+{% endblock %}
+{% block extra_scripts %}
+<script src="{% static 'painel/js/pagamento.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends "painel/base_app.html" %}
+{% block title %}Pagamento concluído — WeCharge{% endblock %}
+{% block content %}
+<section>
+  <div class="success-panel">
+    <div class="success-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="48" height="48"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
+    <h1>Pagamento confirmado</h1>
+    <p>
+      R$ {{ carregador.resumo_final.custo_total|floatformat:2 }} pagos via
+      {% if carregador.forma_pagamento == 'pix' %}Pix
+      {% elif carregador.forma_pagamento == 'credito' %}cartão de crédito
+      {% elif carregador.forma_pagamento == 'debito' %}cartão de débito
+      {% endif %}.
+    </p>
+    <a href="{% url 'painel:painel' %}" class="btn btn-primary">Voltar ao painel</a>
+  </div>
+</section>
+{% endblock %}
